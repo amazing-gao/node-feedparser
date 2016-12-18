@@ -1,10 +1,14 @@
 {
   "name": "node-feedparser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "feedparser not use stream",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "node_modules/.bin/nyc node_modules/.bin/mocha test",
+    "test-cov": "npm run test && npm run analyze-coverage && npm run check-coverage",
+    "analyze-coverage": "node_modules/.bin/nyc report --reporter=html",
+    "check-coverage": "node_modules/.bin/nyc check-coverage --lines 90 --functions 90 --branches 90",
+    "test-travis": "npm run test && node_modules/.bin/nyc report --reporter=text-lcov > coverage/lcov.info && npm run check-coverage"
   },
   "repository": {
     "type": "git",
@@ -25,7 +29,8 @@
     "string-stream": "0.0.7"
   },
   "devDependencies": {
-    "better-assert": "^1.0.2",
+    "mocha": "^3.2.0",
+    "nyc": "^10.0.0",
     "request": "^2.55.0",
     "should": "^6.0.3"
   }
