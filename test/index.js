@@ -8,7 +8,7 @@ describe('node-feedparser unit test', function() {
   it('rss without tags', function(done) {
     this.timeout(10000);
 
-    return request('http://apps.shareholder.com/rss/rss.aspx?channels=633&companyid=YHOO&sh_auth=3461550750%2E0%2E0%2E42725%2E9b39deb9ae37c38e406a8094035d46e4', function(error, resp, body) {
+    return request('http://rss.cnn.com/rss/edition.rss', function(error, resp, body) {
       return parser(body, function(error, ret) {
         should(error).be.exactly(null);
         should(ret.site).have.property('title');
@@ -52,7 +52,7 @@ describe('node-feedparser unit test', function() {
   it('rss with tags', function(done) {
     this.timeout(10000);
 
-    return request('http://apps.shareholder.com/rss/rss.aspx?channels=633&companyid=YHOO&sh_auth=3461550750%2E0%2E0%2E42725%2E9b39deb9ae37c38e406a8094035d46e4', function(error, resp, body) {
+    return request('http://rss.cnn.com/rss/edition.rss', function(error, resp, body) {
       var opts;
       opts = {
         siteTags: ['title', 'date'],
